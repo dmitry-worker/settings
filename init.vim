@@ -16,6 +16,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-rooter'
+Plug 'diepm/vim-rest-console'
 
 " COC: Use release branch (Recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,9 +33,16 @@ Plug 'rust-lang/rust.vim'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
+set t_Co=256
+set background=light
+colorscheme PaperColor
+
+" Set rest syntax to ws files
+au BufNewFile,BufRead,BufReadPost *.ws set filetype=rest
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -179,3 +187,15 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+
+" GitGutter settings
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+set statusline+=%{GitStatus()}
