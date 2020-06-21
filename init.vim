@@ -34,6 +34,8 @@ Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'qpkorr/vim-bufkill'
+
 
 call plug#end()
 
@@ -43,6 +45,13 @@ colorscheme PaperColor
 
 " Set rest syntax to ws files
 au BufNewFile,BufRead,BufReadPost *.ws set filetype=rest
+
+" Set map to leader
+nmap <space> <leader>
+nmap <leader>t :NERDTreeToggle<cr>
+nmap <leader>l :BF<cr>
+nmap <leader>h :BB<cr>
+nmap <leader>w :BD<cr>
 
 " TextEdit might fail if hidden is not set.
 set hidden
