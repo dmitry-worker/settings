@@ -6,7 +6,6 @@ filetype off
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
@@ -14,6 +13,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-rooter'
 Plug 'diepm/vim-rest-console'
@@ -22,7 +22,7 @@ Plug 'diepm/vim-rest-console'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " GUI enhancements
-Plug 'itchyny/lightline.vim'
+Plug 'liuchengxu/eleline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
 
@@ -40,18 +40,23 @@ Plug 'qpkorr/vim-bufkill'
 call plug#end()
 
 set t_Co=256
-set background=light
+set background=dark
 colorscheme PaperColor
 
 " Set rest syntax to ws files
 au BufNewFile,BufRead,BufReadPost *.ws set filetype=rest
+au BufNewFile,BufRead,BufReadPost *.sc set filetype=scala
 
 " Set map to leader
 nmap <space> <leader>
+nmap <leader>r :NERDTreeFind<cr>
 nmap <leader>t :NERDTreeToggle<cr>
 nmap <leader>l :BF<cr>
 nmap <leader>h :BB<cr>
 nmap <leader>w :BD<cr>
+
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>F :Rg<CR>
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -127,10 +132,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -178,6 +179,22 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
+      \ },
+      \ }
 
 " Mappings using CoCList:
 " Show all diagnostics.
