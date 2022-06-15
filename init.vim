@@ -25,6 +25,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'liuchengxu/eleline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
+Plug 'christoomey/vim-tmux-navigator'
 
 " language support
 Plug 'cespare/vim-toml'
@@ -88,6 +89,8 @@ set ruler
 set scrolloff=5
 
 set wildignore+=.pyc,.swp,.class
+
+set noet ci pi sts=0 sw=4 ts=4
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
