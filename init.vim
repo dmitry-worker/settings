@@ -17,12 +17,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-rooter'
 Plug 'diepm/vim-rest-console'
+Plug 'phha/zenburn.nvim'
 
 " COC: Use release branch (Recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " GUI enhancements
-Plug 'liuchengxu/eleline.vim'
+" Plug 'liuchengxu/eleline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
 Plug 'christoomey/vim-tmux-navigator'
@@ -35,14 +36,17 @@ Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'morhetz/gruvbox'
 Plug 'qpkorr/vim-bufkill'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'dinhhuy258/vim-local-history', {'branch': 'master', 'do': ':UpdateRemotePlugins'}
 
 
 call plug#end()
 
 set t_Co=256
 set background=dark
-colorscheme PaperColor
+colorscheme gruvbox
 
 " Set rest syntax to ws files
 au BufNewFile,BufRead,BufReadPost *.ws set filetype=rest
@@ -90,7 +94,7 @@ set scrolloff=5
 
 set wildignore+=.pyc,.swp,.class
 
-set noet ci pi sts=0 sw=4 ts=4
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -195,7 +199,7 @@ function! CocCurrentFunction()
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
